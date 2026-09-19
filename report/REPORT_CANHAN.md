@@ -179,72 +179,162 @@ TestEmbeddingStoreDeleteDocument::test_delete_returns_true_for_existing_doc PASS
 
 ## 5. Kết quả truy xuất của tôi (Competition Results) — Cá nhân (10 điểm)
 
-**Cấu hình:** `LocalEmbedder` — `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`,
-384 chiều · chiến lược **`FixedSizeChunker(chunk_size=500, overlap=50)`** · 10 tài liệu → **70 chunk**.
-Chạy bằng `python scripts/run_benchmark.py --strategy fixed`.
+**Cấu hình:** `LocalEmbedder` — `paraphrase-multilingual-MiniLM-L12-v2`, 384 chiều ·
+chiến lược **`FixedSizeChunker(chunk_size=400, overlap=50)`** · 10 tài liệu → **90 chunk**,
+độ dài trung bình 381 ký tự. Chạy bằng `python bench.py` (harness chung của nhóm);
+kết quả đầy đủ lưu ở `ket_qua_benchmark.txt`.
 
-| # | Câu hỏi | Top-1 chunk | Score | Liên quan? | Câu trả lời của agent |
-|---|---|---|---|---|---|
-| 1 | Ký túc xá có bao nhiêu phòng, sức chứa bao nhiêu SV? | `ky-tuc-xa-quan-ly` | +0.7358 | ✅ | Đúng — trích được 214 phòng / 1500 SV |
-| 2 | Học bổng và vay vốn tín dụng thì liên hệ đâu? | `dao-tao-dai-hoc-hoc-vu` | +0.6330 | ✅ | Đúng — top-3 có cả hai phòng liên quan |
-| 3 | Đơn vị nào tham mưu về chăm sóc sức khỏe SV? | `tram-y-te` | +0.7232 | ✅ | Đúng — có lọc `audience=student` |
-| 4 | Ai quản lý ký túc xá? | `ky-tuc-xa-quan-ly` | +0.7891 | ⚠️ **sai** | **Sai** — trích trang đã bị thay thế |
-| 5 | Tra cứu thư viện online ở đâu, phục vụ ai? | `thu-vien-dich-vu` | +0.6550 | ✅ | Đúng — cả OPAC lẫn danh sách bạn đọc |
+### Hai cách chấm cho cùng một lần chạy
 
-**Bao nhiêu câu trả về chunk liên quan trong top-3?** **5 / 5**
+Nhóm chấm ở **hai mức**, và đây là phát hiện đáng giá nhất của phần cá nhân:
 
-**Nhưng chấm theo rubric thì là 9/10, không phải 10/10.** Câu 4 chỉ được **1 điểm**:
-tài liệu đúng có trong top-3, nhưng đứng **hạng 3**, và câu trả lời của agent **sai**.
+| # | Câu hỏi | Top-1 | Score | Tài liệu gold trong top-3? | Chuỗi đáp án có trong ngữ cảnh? | Điểm |
+|---|---|---|---|---|---|---|
+| 1 | Ký túc xá có bao nhiêu phòng, sức chứa bao nhiêu SV? | `ky-tuc-xa-quan-ly` | +0,789 | ✅ | `214 phòng` ✅ · `1500 sinh viên` ✅ | **2/2** |
+| 2 | Học bổng và vay vốn tín dụng thì liên hệ đâu? | `cong-tac-sinh-vien` | +0,694 | ✅ | `vay vốn tín dụng đào tạo` ❌ · `học bổng khuyến khích học tập` ✅ | **0/2** |
+| 3 | Đơn vị nào tổ chức thi và đánh giá kết quả học tập? | `dao-tao-dai-hoc-hoc-vu` | +0,720 | ✅ | `đánh giá kết quả học tập của sinh viên` ✅ | **2/2** |
+| 4 | Ai quản lý ký túc xá? | `ky-tuc-xa-quan-ly` | +0,759 | ✅ | `sáp nhập lại Phòng CTCT&SV` ❌ | **0/2** |
+| 5 | Tra cứu thư viện online ở đâu, phục vụ ai? | `thu-vien-dich-vu` | +0,702 | ✅ | `opac.utc.edu.vn` ✅ · `trong và ngoài Trường` ❌ | **0/2** |
 
-### Phân tích lỗi câu 4 (cho Bài tập 3.5)
+- **Chấm theo `doc_id` (ngây thơ): 5/5** — câu nào cũng lôi được đúng tài liệu vào top-3.
+- **Chấm theo nội dung: 4/10** — nhưng chỉ 2 câu thực sự chứa đủ câu chữ để trả lời.
 
-Câu *"Ai quản lý ký túc xá của trường?"* trả về:
+**Chênh lệch 5/5 so với 4/10 chính là bài học.** Chấm theo `doc_id` khen quá tay: nó chỉ
+hỏi *"có lấy đúng tài liệu không"*, trong khi cái mà người dùng cần là *"đoạn văn bản lấy về
+có chứa câu trả lời không"*. Ba câu 2, 4, 5 đều lấy **đúng tài liệu nhưng sai chunk**.
 
-| Hạng | Score | Tài liệu | |
-|---|---|---|---|
-| 1 | **+0.7891** | `ky-tuc-xa-quan-ly` | ❌ trang đã bị thay thế |
-| 2 | **+0.7130** | `ky-tuc-xa-quan-ly` | ❌ cũng trang đó |
-| 3 | +0.6575 | `cong-tac-sinh-vien` | ✅ trang đúng |
+### Câu 3 — bằng chứng đo được cho việc lọc metadata
 
-Agent trích nguồn `ban-quan-ly-ky-tuc-xa` với score 0.789 — **rất tự tin và sai**.
+Đây là câu bắt buộc phải lọc, và nó cho một cặp A/B sạch trên cùng một lần chạy:
 
-**Nguyên nhân:** kho chứa **hai câu trả lời chính thức mâu thuẫn nhau**, cả hai đều crawl
-cùng ngày từ website đang chạy của trường:
+| | Top-1 | Điểm |
+|---|---|---|
+| **A — không lọc** | `quan-ly-chat-luong` (+0,744) — Phòng Quản lý chất lượng, `audience: staff` | **1/2** |
+| **B — lọc `audience=student`** | `dao-tao-dai-hoc-hoc-vu` (+0,720) | **2/2** |
+
+Không lọc thì embedding chọn Phòng Quản lý chất lượng, vì trang đó ghi đúng cụm *"Chủ trì tổ
+chức các kỳ thi nội bộ và công tác đánh giá kết quả học tập"* — về mặt ngữ nghĩa nó **không sai**.
+Nhưng câu hỏi là của sinh viên, nên tài liệu `audience: student` mới là cái cần. Một trường
+metadata làm được việc mà không tham số chunking nào làm được.
+
+> Lưu ý: hiệu ứng này **phụ thuộc kích thước chunk**. Đo lại ở `chunk_size=500` thì A đã đạt
+> 2/2 sẵn, tức là cặp A/B biến mất — chunk to hơn vô tình nuốt luôn câu trả lời. Đây là lý do
+> tôi chốt **400** thay vì 500.
+
+### Phân tích lỗi (Bài tập 3.5)
+
+**Lỗi 1 — câu 4: tài liệu cũ đè tài liệu mới.**
+Kho chứa **hai câu trả lời chính thức mâu thuẫn nhau**, cùng crawl một ngày từ website đang chạy:
 
 - `cong-tac-sinh-vien.md` — *"Phòng Chăm sóc người học được thành lập theo Quyết định số
   2109/QĐ-ĐHGTVT trên cơ sở sắp xếp, **sáp nhập lại Phòng CTCT&SV, Ban Quản lý KTX, Trạm Y tế**"*
 - `ky-tuc-xa-quan-ly.md` — vẫn tự mô tả là đơn vị đang hoạt động (QĐ 390/QĐ-TC, 1981)
 
-Trang cũ khớp từ khoá tốt hơn hẳn: câu hỏi chứa "ký túc xá", mà trang đó nhắc cụm này
-hàng chục lần, còn trang đúng chỉ nhắc gián tiếp qua "quản lý sinh viên nội trú".
-Embedding hoàn toàn đúng về mặt ngữ nghĩa — nó chỉ không biết tài liệu nào còn hiệu lực.
+Trang cũ thắng hạng 1 với **+0,759**. Tệ hơn: tài liệu đúng *có* vào top-3, nhưng **chunk lấy
+về lại là đoạn nói về "quản lý sinh viên nội trú", không phải câu nói về sáp nhập** — nên chấm
+theo `doc_id` thì "đạt", chấm theo nội dung thì 0.
 
-**Đây là lỗi KHÔNG sửa được bằng chunking.** Đã kiểm chứng trên cả bốn chiến lược:
+Đã kiểm chứng trên cả bốn chiến lược: **không cách chia nhỏ nào sửa được.** `by_sentences` còn
+tệ hơn — tài liệu đúng rơi hẳn khỏi top-3.
 
-| Chiến lược | Score của trang sai (hạng 1) | Trang đúng nằm ở đâu |
-|---|---|---|
-| Fixed size | +0.7891 | hạng 3 |
-| By sentence | +0.7780 | **ngoài top-3** |
-| Recursive | +0.7796 | trong top-3 |
-| By heading | +0.7635 | trong top-3 |
+**Lỗi 2 — câu 2 và 5: câu trả lời bị chia đôi qua hai chunk.**
+Câu 2 cần hai thông tin nằm ở **hai tài liệu khác nhau**; câu 5 cần hai thông tin nằm ở **hai
+chunk khác nhau của cùng một tài liệu** (địa chỉ OPAC và danh sách đối tượng bạn đọc). Với
+`top_k=3` và chunk 400 ký tự, kho không gom đủ. Đo thử với `SentenceChunker` (chunk trung bình
+471 ký tự) thì câu 5 **đạt 2/2** — chunk to hơn giữ được cả hai vế.
 
-Cả bốn đều đặt trang sai lên hạng 1. Đổi `chunk_size`, đổi separator, cắt theo tiêu đề —
-không cách nào giúp được, vì vấn đề không nằm ở chỗ cắt.
+**Lỗi 3 — 116 ký tự vô hình làm hỏng phép so khớp.**
+Lần chạy đầu, câu 5 trượt cả `trong và ngoài Trường` dù tài liệu ghi đúng hệt như vậy. Nguyên
+nhân là **`U+00A0` NO-BREAK SPACE** (từ `&nbsp;` trong HTML gốc) nằm giữa "ngoài" và "Trường" —
+mắt thường không thấy, nhưng với máy thì đó không phải dấu cách. Toàn corpus có **116 ký tự
+như vậy trên 8/10 tài liệu**. Chúng còn âm thầm phá `RecursiveChunker`, vì danh sách separator
+của nó chứa dấu cách thường nên không cắt được chỗ bị NBSP dính liền.
+Đã sửa trong `scripts/clean_utc_pages.py` và chuẩn hoá lại corpus.
 
-**Đề xuất cải thiện:** thêm metadata về hiệu lực và dùng nó để xếp hạng, không chỉ để lọc:
+**Đề xuất cải thiện, theo thứ tự ưu tiên:**
 
-```yaml
-document_version: "1981-10-24"
-superseded_by: cong-tac-sinh-vien     # QĐ 2109/QĐ-ĐHGTVT
-status: superseded                    # active | superseded
-```
-
-Rồi `search_with_filter(metadata_filter={"status": "active"})`, hoặc phạt điểm tài liệu
-`superseded` trước khi cắt top-k. Chi phí: một trường metadata. Hiệu quả: câu 4 từ 1 điểm
-lên 2 điểm, và quan trọng hơn là agent thôi trả lời sai một cách tự tin.
+1. **Thêm trường hiệu lực vào metadata** và dùng khi xếp hạng, không chỉ để lọc — sửa được lỗi 1:
+   ```yaml
+   document_version: "1981-10-24"
+   superseded_by: cong-tac-sinh-vien    # QĐ 2109/QĐ-ĐHGTVT
+   status: superseded                   # active | superseded
+   ```
+2. **Tăng `top_k` từ 3 lên 5**, hoặc gom các chunk cùng `doc_id` trước khi dựng ngữ cảnh — sửa lỗi 2.
+3. **Chuẩn hoá Unicode ngay khi nạp dữ liệu**, không đợi đến lúc phát hiện — lỗi 3 mất gần một
+   lượt chạy mới tìm ra, và nó hoàn toàn vô hình khi đọc file.
 
 **Điều hay nhất tôi học được từ thành viên khác / nhóm khác (qua demo):**
 > *Điền sau buổi demo.*
+
+---
+
+## 6. Những khó khăn đã gặp và cách xử lý (Phản ngẫm)
+
+> `exercises.md` (Bài tập 3.5) yêu cầu ghi phân tích lỗi vào *"Báo cáo — Phần 7 (Những gì
+> tôi học được)"*, nhưng mẫu `REPORT_CANHAN.md` chỉ đánh số đến Phần 5. Phần 6 này chính là
+> phần đó; phân tích lỗi chi tiết của 5 câu benchmark nằm ở cuối Phần 5.
+
+Phần này ghi lại các vấn đề **thực sự** đã cản đường, vì phần lớn thời gian của lab không nằm ở
+việc viết 13 hàm TODO mà nằm ở những chỗ dưới đây.
+
+**1. Nguồn dữ liệu đầu tiên chọn sai — mất công crawl rồi phải bỏ.**
+Nhóm định dùng `tuyensinh.utc.edu.vn/?q=thong-tin-nganh-tuyen-sinh`. Trang mở ra nhìn đầy đủ
+thông tin ngành. Nhưng crawl xong thì mỗi trang chỉ cho ~1.860 ký tự, và con số đó **đúng bằng
+phần menu + footer của một trang rỗng** — toàn bộ nội dung thật nằm trong ảnh JPEG
+(`KHMT 2026.jpg`, `KT MT(1).jpg`…). Trang `?q=hoi-dap` có chữ thật nhưng chỉ là câu hỏi của thí
+sinh, không có câu trả lời nào.
+*Bài học:* phải **đo số ký tự trích được** trước khi chốt nguồn, không tin vào việc "mở ra thấy
+có chữ". Cách kiểm tra rẻ nhất: crawl 1 trang, so độ dài text với một trang chắc chắn rỗng của
+cùng site — bằng nhau thì trang đó là ảnh.
+
+**2. Chạy benchmark trên `MockEmbedder` suốt một thời gian dài mà kết quả vô nghĩa.**
+42 test vẫn xanh nên rất dễ tưởng mọi thứ ổn. Nhưng `MockEmbedder` băm MD5, không mang ngữ nghĩa:
+đo thử thì `"cat"` gần `"dog"` (+0,1607) hơn cả `"cats"` (−0,0638), và câu hỏi về đăng ký học phần
+gần câu về **chuối** hơn gần chính câu trả lời của nó.
+*Bài học:* bộ test chỉ kiểm tra **hợp đồng của hàm**, không kiểm tra chất lượng ngữ nghĩa. Xanh
+42/42 không có nghĩa là hệ thống truy xuất đúng. Sau khi chuyển sang embedder thật, cùng cặp câu
+đó cho +0,9337 và +0,3033 — đúng thứ tự.
+
+**3. Windows Application Control chặn một file `.dll` của `scikit-learn`.**
+Cài xong `sentence-transformers` thì import lỗi:
+`DLL load failed while importing _expected_mutual_info_fast: An Application Control policy has
+blocked this file`. Thoạt nhìn tưởng thiếu thư viện hoặc hỏng cài đặt.
+*Cách xử lý:* thử import từng gói một mới thấy `torch`, `scipy`, `transformers` và cả `sklearn`
+đều bình thường — **chỉ đúng một module bị chặn**, và `sentence-transformers` chỉ gọi nó gián
+tiếp. Hạ `scikit-learn` xuống bản 1.7.2 là chạy được. **Không tắt Application Control** — đó là
+thiết lập bảo mật của máy, tắt đi để chữa một lỗi thư viện là đánh đổi sai.
+
+**4. Dung lượng ổ đĩa — chỉ còn 8 GB.**
+Cài `sentence-transformers` theo mặc định sẽ kéo theo bản `torch` có CUDA (~2,5 GB) mà lab không
+dùng tới, vì corpus chỉ có 10 tài liệu và chạy CPU là đủ.
+*Cách xử lý:* cài `torch` bản CPU riêng trước bằng
+`pip install torch --index-url https://download.pytorch.org/whl/cpu` (~600 MB), rồi mới cài
+`sentence-transformers`. Tổng chi phí còn ~1,4 GB kể cả model.
+
+**5. 116 ký tự vô hình phá phép so khớp chuỗi — mất lâu nhất để tìm ra.**
+Benchmark báo trượt chuỗi `trong và ngoài Trường` trong khi mở file ra đọc thì thấy đúng y hệt.
+Grep cũng không ra. Phải in mã Unicode từng ký tự mới thấy giữa "ngoài" và "Trường" là
+**`U+00A0` NO-BREAK SPACE**, sinh ra từ `&nbsp;` trong HTML gốc. Toàn corpus có 116 ký tự như vậy
+trên 8/10 tài liệu, và chúng còn âm thầm phá `RecursiveChunker` (separator của nó là dấu cách
+thường nên không cắt được chỗ bị NBSP dính liền).
+*Bài học:* dữ liệu crawl từ HTML **phải chuẩn hoá Unicode ngay khi nạp**, không đợi đến lúc có
+lỗi lạ. Khi một phép so khớp thất bại mà mắt nhìn thấy đúng, nghi ngờ ký tự vô hình trước tiên —
+cách kiểm tra là in `repr()` hoặc mã codepoint chứ không phải nhìn lại lần nữa.
+
+**6. Hai cách chấm cho cùng một kết quả, chênh nhau rất xa.**
+Chấm theo `doc_id` cho **5/5**; chấm theo nội dung cho **4/10**. Ban đầu tôi chỉ chấm theo `doc_id`
+và tưởng kết quả gần như hoàn hảo.
+*Bài học:* "lấy đúng tài liệu" và "lấy được đoạn chứa câu trả lời" là hai việc khác nhau. Ba trong
+năm câu lấy **đúng tài liệu nhưng sai chunk**. Chỉ số nào dễ đạt thì thường là chỉ số đo sai thứ
+mình quan tâm.
+
+**7. Dữ liệu cá nhân suýt lọt vào repo.**
+Các trang giới thiệu đơn vị có bảng danh sách cán bộ kèm **số điện thoại di động cá nhân**. Bước
+làm sạch đầu tiên bỏ sót trang Phòng Bảo vệ vì heading của trang đó bị gõ sai thành
+`ĐỘI NGŨ CÁN B=Ộ CHUYÊN VIÊN` (có dấu `=` thừa), nên khớp chuỗi chính xác không bắt được.
+*Cách xử lý:* neo vào tiêu đề cột `Họ tên` — thứ xuất hiện ở mọi bảng và không xuất hiện trong
+văn xuôi — thay vì neo vào dòng tiêu đề mục. Giữ lại địa chỉ, số tổng đài và email đơn vị vì đó
+là thông tin của tổ chức, không phải của cá nhân.
 
 ---
 
@@ -256,5 +346,5 @@ lên 2 điểm, và quan trọng hơn là agent thôi trả lời sai một các
 | Hướng tiếp cận của tôi (My Approach) | 10 / 10 |
 | Hoàn thiện code (Core Implementation — tests) | 30 / 30 |
 | Dự đoán độ tương tự (Similarity Predictions) | / 5 |
-| Kết quả truy xuất của tôi (Competition Results) | 9 / 10 |
+| Kết quả truy xuất của tôi (Competition Results) | 4 / 10 (chấm nội dung) · 5/5 (chấm doc_id) |
 | **Tổng phần cá nhân** | **/ 60** |
