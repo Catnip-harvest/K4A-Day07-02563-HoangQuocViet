@@ -38,7 +38,11 @@ MIN_RUN = 3
 # Everything from here down is the site's own furniture, not the page.
 TAIL_MARKERS = ("Đăng bởi:", "Bài viết xem nhiều", "Tin tức nổi bật")
 # The per-person roster starts at one of these and runs to the end of the body.
-ROSTER_MARKERS = ("ĐỘI NGŨ CÁN BỘ", "DANH SÁCH CÁN BỘ", "ĐỘI NGŨ NHÂN SỰ", "DANH SÁCH NHÂN SỰ")
+# Matching the exact heading is too brittle: the Bao ve page spells it
+# "DOI NGU CAN B=O CHUYEN VIEN", with a stray "=" the source site typed. The
+# table header "Ho ten" is the reliable anchor - it appears on every roster and
+# nowhere in the prose.
+ROSTER_PATTERN = re.compile(r"^(ĐỘI NGŨ|DANH SÁCH CÁN BỘ|DANH SÁCH NHÂN SỰ|Họ tên$|Họ và tên$)")
 
 PHONE = re.compile(r"\b0\d[\d\s.\-]{7,12}\d\b")
 PERSONAL_EMAIL = re.compile(r"\b[\w.\-]+@utc\.edu\.vn\b")
@@ -80,6 +84,13 @@ def drop_chrome_runs(lines: list[str], common: set[str]) -> list[str]:
 def cut_at(lines: list[str], markers: tuple[str, ...]) -> list[str]:
     for position, line in enumerate(lines):
         if any(line.startswith(marker) for marker in markers):
+            return lines[:position]
+    return lines
+
+
+def cut_roster(lines: list[str]) -> list[str]:
+    for position, line in enumerate(lines):
+        if ROSTER_PATTERN.match(line):
             return lines[:position]
     return lines
 
@@ -126,7 +137,7 @@ def main() -> int:
         before = sum(len(line) for line in lines)
         kept = drop_chrome_runs(lines, common)
         kept = cut_at(kept, TAIL_MARKERS)
-        kept = cut_at(kept, ROSTER_MARKERS)
+        kept = cut_roster(kept)
         kept = redact(kept)
         body = collapse(kept)
         path.write_text(f"{front_matter}\n{body}", encoding="utf-8")
