@@ -1,13 +1,13 @@
 ---
-doc_id: "ke-hoach-tai-chinh-hoc-phi"
+doc_id: ke-hoach-tai-chinh-hoc-phi
 title: "Phòng Kế hoạch - Tài chính: học phí và các khoản thu"
-source_url: "https://www.utc.edu.vn/gioi-thieu/phong-ke-hoach-tai-chinh"
-retrieved_at: "2026-09-19"
-document_version: "not-stated"
-audience: "all"
-department: "phong-ke-hoach-tai-chinh"
-category: "hoc-phi"
-language: "vi"
+source_url: https://www.utc.edu.vn/gioi-thieu/phong-ke-hoach-tai-chinh
+retrieved_at: 2026-09-19
+document_version: not-stated
+audience: all
+department: phong-ke-hoach-tai-chinh
+category: hoc-phi
+language: vi
 ---
 # Phòng Kế hoạch - Tài chính: học phí và các khoản thu
 

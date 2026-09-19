@@ -1,13 +1,13 @@
 ---
-doc_id: "bao-ve-an-ninh"
+doc_id: bao-ve-an-ninh
 title: "Phòng Bảo vệ: an ninh trật tự và quản lý ra vào trong trường"
-source_url: "https://www.utc.edu.vn/gioi-thieu/phong-bao-ve"
-retrieved_at: "2026-09-19"
-document_version: "not-stated"
-audience: "all"
-department: "phong-bao-ve"
-category: "an-ninh"
-language: "vi"
+source_url: https://www.utc.edu.vn/gioi-thieu/phong-bao-ve
+retrieved_at: 2026-09-19
+document_version: not-stated
+audience: all
+department: phong-bao-ve
+category: an-ninh
+language: vi
 ---
 # Phòng Bảo vệ: an ninh trật tự và quản lý ra vào trong trường
 

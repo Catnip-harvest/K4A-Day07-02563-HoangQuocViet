@@ -1,13 +1,13 @@
 ---
-doc_id: "tram-y-te"
+doc_id: tram-y-te
 title: "Trạm Y tế: chăm sóc sức khỏe và bảo hiểm y tế sinh viên"
-source_url: "https://www.utc.edu.vn/gioi-thieu/tram-y-te"
-retrieved_at: "2026-09-19"
-document_version: "not-stated"
-audience: "student"
-department: "tram-y-te"
-category: "y-te"
-language: "vi"
+source_url: https://www.utc.edu.vn/gioi-thieu/tram-y-te
+retrieved_at: 2026-09-19
+document_version: not-stated
+audience: student
+department: tram-y-te
+category: y-te
+language: vi
 ---
 # Trạm Y tế: chăm sóc sức khỏe và bảo hiểm y tế sinh viên
 

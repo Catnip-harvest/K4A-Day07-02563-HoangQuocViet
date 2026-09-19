@@ -1,13 +1,13 @@
 ---
-doc_id: "cong-tac-sinh-vien"
+doc_id: cong-tac-sinh-vien
 title: "Phòng Chăm sóc người học: công tác sinh viên, học bổng và chế độ chính sách"
-source_url: "https://www.utc.edu.vn/gioi-thieu/phong-cong-tac-chinh-tri-va-sinh-vien"
-retrieved_at: "2026-09-19"
-document_version: "not-stated"
-audience: "student"
-department: "phong-cham-soc-nguoi-hoc"
-category: "cong-tac-sinh-vien"
-language: "vi"
+source_url: https://www.utc.edu.vn/gioi-thieu/phong-cong-tac-chinh-tri-va-sinh-vien
+retrieved_at: 2026-09-19
+document_version: not-stated
+audience: student
+department: phong-cham-soc-nguoi-hoc
+category: cong-tac-sinh-vien
+language: vi
 ---
 # Phòng Chăm sóc người học: công tác sinh viên, học bổng và chế độ chính sách
 

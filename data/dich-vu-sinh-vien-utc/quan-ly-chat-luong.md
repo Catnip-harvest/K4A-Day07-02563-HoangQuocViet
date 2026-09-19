@@ -1,13 +1,13 @@
 ---
-doc_id: "quan-ly-chat-luong"
+doc_id: quan-ly-chat-luong
 title: "Phòng Quản lý chất lượng: khảo thí và đảm bảo chất lượng đào tạo"
-source_url: "https://www.utc.edu.vn/gioi-thieu/phong-quan-ly-chat-luong"
-retrieved_at: "2026-09-19"
-document_version: "not-stated"
-audience: "staff"
-department: "phong-quan-ly-chat-luong"
-category: "dam-bao-chat-luong"
-language: "vi"
+source_url: https://www.utc.edu.vn/gioi-thieu/phong-quan-ly-chat-luong
+retrieved_at: 2026-09-19
+document_version: not-stated
+audience: staff
+department: phong-quan-ly-chat-luong
+category: dam-bao-chat-luong
+language: vi
 ---
 # Phòng Quản lý chất lượng: khảo thí và đảm bảo chất lượng đào tạo
 

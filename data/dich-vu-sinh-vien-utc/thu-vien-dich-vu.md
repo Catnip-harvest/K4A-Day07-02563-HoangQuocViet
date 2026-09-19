@@ -1,13 +1,13 @@
 ---
-doc_id: "thu-vien-dich-vu"
+doc_id: thu-vien-dich-vu
 title: "Trung tâm Thông tin - Thư viện: dịch vụ và đối tượng bạn đọc"
-source_url: "https://www.utc.edu.vn/gioi-thieu/trung-tam-thong-tin-thu-vien"
-retrieved_at: "2026-09-19"
-document_version: "not-stated"
-audience: "all"
-department: "trung-tam-thong-tin-thu-vien"
-category: "thu-vien"
-language: "vi"
+source_url: https://www.utc.edu.vn/gioi-thieu/trung-tam-thong-tin-thu-vien
+retrieved_at: 2026-09-19
+document_version: not-stated
+audience: all
+department: trung-tam-thong-tin-thu-vien
+category: thu-vien
+language: vi
 ---
 # Trung tâm Thông tin - Thư viện: dịch vụ và đối tượng bạn đọc
 

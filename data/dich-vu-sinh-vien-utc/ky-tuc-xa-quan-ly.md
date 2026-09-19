@@ -1,13 +1,13 @@
 ---
-doc_id: "ky-tuc-xa-quan-ly"
+doc_id: ky-tuc-xa-quan-ly
 title: "Ban Quản lý Ký túc xá: chức năng và dịch vụ cho sinh viên nội trú"
-source_url: "https://www.utc.edu.vn/gioi-thieu/ban-quan-ly-ky-tuc-xa"
-retrieved_at: "2026-09-19"
-document_version: "not-stated"
-audience: "student"
-department: "ban-quan-ly-ky-tuc-xa"
-category: "ky-tuc-xa"
-language: "vi"
+source_url: https://www.utc.edu.vn/gioi-thieu/ban-quan-ly-ky-tuc-xa
+retrieved_at: 2026-09-19
+document_version: not-stated
+audience: student
+department: ban-quan-ly-ky-tuc-xa
+category: ky-tuc-xa
+language: vi
 ---
 # Ban Quản lý Ký túc xá: chức năng và dịch vụ cho sinh viên nội trú
 

@@ -1,13 +1,13 @@
 ---
-doc_id: "dao-tao-truc-tuyen"
+doc_id: dao-tao-truc-tuyen
 title: "Trung tâm Đào tạo trực tuyến UTC: hệ thống học trực tuyến"
-source_url: "https://www.utc.edu.vn/gioi-thieu/trung-tam-dao-tao-truc-tuyen-utc"
-retrieved_at: "2026-09-19"
-document_version: "not-stated"
-audience: "student"
-department: "trung-tam-dao-tao-truc-tuyen"
-category: "hoc-truc-tuyen"
-language: "vi"
+source_url: https://www.utc.edu.vn/gioi-thieu/trung-tam-dao-tao-truc-tuyen-utc
+retrieved_at: 2026-09-19
+document_version: not-stated
+audience: student
+department: trung-tam-dao-tao-truc-tuyen
+category: hoc-truc-tuyen
+language: vi
 ---
 # Trung tâm Đào tạo trực tuyến UTC: hệ thống học trực tuyến
 

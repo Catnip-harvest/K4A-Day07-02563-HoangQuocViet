@@ -1,13 +1,13 @@
 ---
-doc_id: "dao-tao-dai-hoc-hoc-vu"
+doc_id: dao-tao-dai-hoc-hoc-vu
 title: "Phòng Đào tạo đại học: đăng ký học phần và các thủ tục học vụ"
-source_url: "https://www.utc.edu.vn/gioi-thieu/phong-dao-tao-dai-hoc"
-retrieved_at: "2026-09-19"
-document_version: "not-stated"
-audience: "student"
-department: "phong-dao-tao-dai-hoc"
-category: "hoc-vu"
-language: "vi"
+source_url: https://www.utc.edu.vn/gioi-thieu/phong-dao-tao-dai-hoc
+retrieved_at: 2026-09-19
+document_version: not-stated
+audience: student
+department: phong-dao-tao-dai-hoc
+category: hoc-vu
+language: vi
 ---
 # Phòng Đào tạo đại học: đăng ký học phần và các thủ tục học vụ
 

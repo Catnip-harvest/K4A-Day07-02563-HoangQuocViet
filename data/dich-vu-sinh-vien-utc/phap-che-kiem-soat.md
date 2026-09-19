@@ -1,13 +1,13 @@
 ---
-doc_id: "phap-che-kiem-soat"
+doc_id: phap-che-kiem-soat
 title: "Phòng Pháp chế và Kiểm soát nội bộ: xây dựng và rà soát văn bản nội bộ"
-source_url: "https://www.utc.edu.vn/gioi-thieu/phong-phap-che-va-kiem-soat-noi-bo"
-retrieved_at: "2026-09-19"
-document_version: "not-stated"
-audience: "staff"
-department: "phong-phap-che-va-kiem-soat-noi-bo"
-category: "phap-che"
-language: "vi"
+source_url: https://www.utc.edu.vn/gioi-thieu/phong-phap-che-va-kiem-soat-noi-bo
+retrieved_at: 2026-09-19
+document_version: not-stated
+audience: staff
+department: phong-phap-che-va-kiem-soat-noi-bo
+category: phap-che
+language: vi
 ---
 # Phòng Pháp chế và Kiểm soát nội bộ: xây dựng và rà soát văn bản nội bộ
 
