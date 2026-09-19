@@ -175,10 +175,13 @@ Gợi ý dựa trên corpus hiện có (nhóm sửa lại cho hợp):
 
 | Thành viên | Chiến lược đề xuất | Tham số |
 |---|---|---|
-| TV1 | `FixedSizeChunker` (đường cơ sở) | `chunk_size=500, overlap=50` |
+| Việt (02563) | `FixedSizeChunker` — **đã chốt** | `chunk_size=500, overlap=50` |
 | TV2 | `SentenceChunker` | `max_sentences_per_chunk=3` |
 | TV3 | `RecursiveChunker` | `chunk_size=400` |
-| TV4 (Việt) | `HeadingChunker` tự viết — cắt theo 4 heading | — |
+| TV4 | `HeadingChunker` — cắt theo 4 heading | `max_chars=1200` |
+
+> `HeadingChunker` đã viết sẵn trong `scripts/run_benchmark.py`, ai nhận ô đó thì dùng
+> `--strategy heading`, không phải viết lại. K4_VARIANT bắt buộc có **một** người làm ô này.
 
 Ai nhận ô nào thì nhắn lại trong nhóm để khỏi trùng.
 

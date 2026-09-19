@@ -159,8 +159,10 @@ TestEmbeddingStoreDeleteDocument::test_delete_returns_true_for_existing_doc PASS
 ## 4. Dự đoán độ tương tự (Similarity Predictions) — Cá nhân (5 điểm)
 
 > **CHƯA ĐIỀN — phần này phải tự dự đoán TRƯỚC khi chạy code, nên không thể điền hộ.**
-> Cách làm: viết dự đoán vào cột "Dự đoán" trước, rồi mới chạy
-> `python scripts/similarity_predictions.py` để lấy cột "Điểm thực tế".
+>
+> Cách nhanh nhất: mở giao diện (`python ui/api_server.py` + `cd ui && npm run dev`), vào tab
+> **Độ tương tự**. Nút hiện điểm bị khoá cho đến khi cả 5 cặp có dự đoán, nên không thể xem
+> trộm rồi điền ngược. Điền xong thì chép số vào bảng dưới.
 
 | Cặp | Câu A | Câu B | Dự đoán | Điểm thực tế | Đúng? |
 |------|-----------|-----------|---------|--------------|-------|
@@ -177,38 +179,72 @@ TestEmbeddingStoreDeleteDocument::test_delete_returns_true_for_existing_doc PASS
 
 ## 5. Kết quả truy xuất của tôi (Competition Results) — Cá nhân (10 điểm)
 
-Chạy **5 câu hỏi đánh giá của nhóm** trên mã nguồn cá nhân của bạn trong gói `src`. **5 câu hỏi này phải trùng với các thành viên cùng nhóm** (xem `REPORT_NHOM.md`).
+**Cấu hình:** `LocalEmbedder` — `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`,
+384 chiều · chiến lược **`FixedSizeChunker(chunk_size=500, overlap=50)`** · 10 tài liệu → **70 chunk**.
+Chạy bằng `python scripts/run_benchmark.py --strategy fixed`.
 
-> **CHƯA ĐIỀN — chờ nhóm chốt bộ tài liệu và 5 câu hỏi đánh giá (Bài tập 3.0 và 3.2).**
->
-> **Cảnh báo kỹ thuật cần lưu ý trước khi chạy benchmark:** `MockEmbedder` mặc định là hàm băm **MD5**, nó **không mang thông tin ngữ nghĩa nào**. Đo thử trên chính repo này:
->
-> | Cặp | Điểm cosine |
-> |---|---|
-> | `"How do I register for courses?"` vs `"Course registration opens on the first Monday of August."` | **−0.1332** |
-> | `"How do I register for courses?"` vs `"Bananas are a good source of potassium."` | **−0.2260** |
-> | `"cat"` vs `"cats"` | **−0.0638** |
-> | `"cat"` vs `"dog"` | **+0.1607** |
-> | `"identical"` vs `"identical"` | **+1.0000** |
->
-> Chỉ có trùng khớp chuỗi tuyệt đối mới cho điểm 1.0; `"cat"` gần `"dog"` hơn cả `"cats"`. Nghĩa là **điểm Chất lượng Truy xuất (10 điểm nhóm) sẽ gần như bằng 0 nếu chạy benchmark trên mock embedder** — thứ tự top-3 chỉ là ngẫu nhiên.
->
-> Bộ kiểm thử 42 test thì hoàn toàn ổn với mock (chúng chỉ kiểm tra hợp đồng của hàm, không kiểm tra chất lượng ngữ nghĩa). Nhưng để benchmark có ý nghĩa thì cần một embedder thật:
-> - `pip install -r requirements-local.txt` — mô hình multilingual chạy cục bộ, miễn phí, không cần API key, hỗ trợ tiếng Việt tốt (tải về khoảng vài GB cho PyTorch ở lần chạy đầu)
-> - hoặc `pip install google-genai` + `GEMINI_API_KEY` — free tier tại aistudio.google.com, nhẹ hơn nhiều
+| # | Câu hỏi | Top-1 chunk | Score | Liên quan? | Câu trả lời của agent |
+|---|---|---|---|---|---|
+| 1 | Ký túc xá có bao nhiêu phòng, sức chứa bao nhiêu SV? | `ky-tuc-xa-quan-ly` | +0.7358 | ✅ | Đúng — trích được 214 phòng / 1500 SV |
+| 2 | Học bổng và vay vốn tín dụng thì liên hệ đâu? | `dao-tao-dai-hoc-hoc-vu` | +0.6330 | ✅ | Đúng — top-3 có cả hai phòng liên quan |
+| 3 | Đơn vị nào tham mưu về chăm sóc sức khỏe SV? | `tram-y-te` | +0.7232 | ✅ | Đúng — có lọc `audience=student` |
+| 4 | Ai quản lý ký túc xá? | `ky-tuc-xa-quan-ly` | +0.7891 | ⚠️ **sai** | **Sai** — trích trang đã bị thay thế |
+| 5 | Tra cứu thư viện online ở đâu, phục vụ ai? | `thu-vien-dich-vu` | +0.6550 | ✅ | Đúng — cả OPAC lẫn danh sách bạn đọc |
 
-| # | Câu hỏi (Query) | Top-1 Chunk truy xuất được (tóm tắt) | Điểm Score | Có liên quan không? (Relevant) | Câu trả lời của Agent (tóm tắt) |
-|---|-------|--------------------------------|-------|-----------|------------------------|
-| 1 | | | | | |
-| 2 | | | | | |
-| 3 | | | | | |
-| 4 | | | | | |
-| 5 | | | | | |
+**Bao nhiêu câu trả về chunk liên quan trong top-3?** **5 / 5**
 
-**Bao nhiêu câu hỏi trả về chunk có liên quan trong top-3?** __ / 5
+**Nhưng chấm theo rubric thì là 9/10, không phải 10/10.** Câu 4 chỉ được **1 điểm**:
+tài liệu đúng có trong top-3, nhưng đứng **hạng 3**, và câu trả lời của agent **sai**.
+
+### Phân tích lỗi câu 4 (cho Bài tập 3.5)
+
+Câu *"Ai quản lý ký túc xá của trường?"* trả về:
+
+| Hạng | Score | Tài liệu | |
+|---|---|---|---|
+| 1 | **+0.7891** | `ky-tuc-xa-quan-ly` | ❌ trang đã bị thay thế |
+| 2 | **+0.7130** | `ky-tuc-xa-quan-ly` | ❌ cũng trang đó |
+| 3 | +0.6575 | `cong-tac-sinh-vien` | ✅ trang đúng |
+
+Agent trích nguồn `ban-quan-ly-ky-tuc-xa` với score 0.789 — **rất tự tin và sai**.
+
+**Nguyên nhân:** kho chứa **hai câu trả lời chính thức mâu thuẫn nhau**, cả hai đều crawl
+cùng ngày từ website đang chạy của trường:
+
+- `cong-tac-sinh-vien.md` — *"Phòng Chăm sóc người học được thành lập theo Quyết định số
+  2109/QĐ-ĐHGTVT trên cơ sở sắp xếp, **sáp nhập lại Phòng CTCT&SV, Ban Quản lý KTX, Trạm Y tế**"*
+- `ky-tuc-xa-quan-ly.md` — vẫn tự mô tả là đơn vị đang hoạt động (QĐ 390/QĐ-TC, 1981)
+
+Trang cũ khớp từ khoá tốt hơn hẳn: câu hỏi chứa "ký túc xá", mà trang đó nhắc cụm này
+hàng chục lần, còn trang đúng chỉ nhắc gián tiếp qua "quản lý sinh viên nội trú".
+Embedding hoàn toàn đúng về mặt ngữ nghĩa — nó chỉ không biết tài liệu nào còn hiệu lực.
+
+**Đây là lỗi KHÔNG sửa được bằng chunking.** Đã kiểm chứng trên cả bốn chiến lược:
+
+| Chiến lược | Score của trang sai (hạng 1) | Trang đúng nằm ở đâu |
+|---|---|---|
+| Fixed size | +0.7891 | hạng 3 |
+| By sentence | +0.7780 | **ngoài top-3** |
+| Recursive | +0.7796 | trong top-3 |
+| By heading | +0.7635 | trong top-3 |
+
+Cả bốn đều đặt trang sai lên hạng 1. Đổi `chunk_size`, đổi separator, cắt theo tiêu đề —
+không cách nào giúp được, vì vấn đề không nằm ở chỗ cắt.
+
+**Đề xuất cải thiện:** thêm metadata về hiệu lực và dùng nó để xếp hạng, không chỉ để lọc:
+
+```yaml
+document_version: "1981-10-24"
+superseded_by: cong-tac-sinh-vien     # QĐ 2109/QĐ-ĐHGTVT
+status: superseded                    # active | superseded
+```
+
+Rồi `search_with_filter(metadata_filter={"status": "active"})`, hoặc phạt điểm tài liệu
+`superseded` trước khi cắt top-k. Chi phí: một trường metadata. Hiệu quả: câu 4 từ 1 điểm
+lên 2 điểm, và quan trọng hơn là agent thôi trả lời sai một cách tự tin.
 
 **Điều hay nhất tôi học được từ thành viên khác / nhóm khác (qua demo):**
-> *Viết 2-3 câu:*
+> *Điền sau buổi demo.*
 
 ---
 
@@ -220,5 +256,5 @@ Chạy **5 câu hỏi đánh giá của nhóm** trên mã nguồn cá nhân củ
 | Hướng tiếp cận của tôi (My Approach) | 10 / 10 |
 | Hoàn thiện code (Core Implementation — tests) | 30 / 30 |
 | Dự đoán độ tương tự (Similarity Predictions) | / 5 |
-| Kết quả truy xuất của tôi (Competition Results) | / 10 |
+| Kết quả truy xuất của tôi (Competition Results) | 9 / 10 |
 | **Tổng phần cá nhân** | **/ 60** |
