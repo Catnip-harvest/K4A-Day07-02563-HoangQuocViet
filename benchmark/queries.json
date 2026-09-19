@@ -1,60 +1,61 @@
 {
   "corpus": "data/dich-vu-sinh-vien-utc",
   "agreed_on": "2026-09-19",
-  "note": "Every member runs these five verbatim. Changing a query invalidates the cross-member comparison, so edit only by group agreement. gold_doc_ids is what hit@3 is scored against; trap_doc_ids is a wrong-but-plausible document whose retrieval is itself a finding.",
+  "note": "Single source of truth for the group's five queries. Kept in step with bench.py by hand - the wording here and there must match exactly, or two members' numbers stop being comparable. gold_doc_ids drives doc-id hit@3; checks drives content scoring, which is the stricter of the two and the one the group reports. trap_doc_ids is a wrong-but-plausible document whose retrieval is itself a finding.",
   "scoring": {
-    "2": "a gold chunk is in top-3 AND the agent's answer is correct",
-    "1": "a gold chunk is in top-3 but the answer lacks detail, or the gold chunk is not ranked first",
-    "0": "no gold chunk in top-3"
+    "doc_id": "hit@3 - a gold document appears anywhere in top-3. Flattering; use content scoring as the headline.",
+    "2": "every check string is present in the top-3 context AND top-1 is a gold document",
+    "1": "every check string is present, but top-1 is not a gold document",
+    "0": "at least one check string is missing from the top-3 context"
   },
   "queries": [
     {
       "id": "Q1",
-      "query": "Ký túc xá của trường có bao nhiêu phòng và sức chứa bao nhiêu sinh viên?",
-      "tests": "Single-hop fact retrieval with exact number extraction. The easiest of the five; if this fails, the pipeline is broken rather than the strategy.",
+      "query": "Ký túc xá có bao nhiêu phòng và sức chứa bao nhiêu sinh viên?",
+      "tests": "Single-hop fact retrieval with exact number extraction. The control: if this fails, the pipeline is broken rather than the strategy.",
       "gold_answer": "03 khối nhà vĩnh cửu 4-5 tầng, tổng số 214 phòng khép kín, sức chứa 1500 sinh viên.",
       "gold_doc_ids": ["ky-tuc-xa-quan-ly"],
-      "gold_quote": "Ký túc xá của trường có 03 khối nhà vĩnh cửu từ 4 – 5 tầng với tổng số 214 phòng hoàn toàn có công trình phụ khép kín với sức chứa 1500 sinh viên",
+      "checks": ["214 phòng", "1500 sinh viên"],
       "metadata_filter": null,
       "trap_doc_ids": []
     },
     {
       "id": "Q2",
-      "query": "Sinh viên muốn hỏi về học bổng và vay vốn tín dụng đào tạo thì liên hệ đơn vị nào?",
-      "tests": "Disambiguation between two offices that both own part of the answer. 'học bổng' appears in three documents, so a correct answer has to separate the two kinds of scholarship rather than return the first hit.",
-      "gold_answer": "Phòng Chăm sóc người học (P101-103 Nhà A9; Văn phòng Hỗ trợ sinh viên P108 Nhà A6) giải quyết chế độ chính sách, vay vốn tín dụng đào tạo, và xét cấp học bổng tài trợ / học bổng ngoài ngân sách. Riêng học bổng khuyến khích học tập do Phòng Đào tạo đại học chủ trì xét.",
+      "query": "Hỏi về học bổng và vay vốn tín dụng đào tạo thì liên hệ đơn vị nào?",
+      "tests": "The answer is split across two documents. Content scoring exposes what doc-id scoring hides: top-3 retrieves both offices but does not gather both facts.",
+      "gold_answer": "Phòng Chăm sóc người học giải quyết chế độ chính sách, vay vốn tín dụng đào tạo và học bổng tài trợ / ngoài ngân sách. Riêng học bổng khuyến khích học tập do Phòng Đào tạo đại học chủ trì xét.",
       "gold_doc_ids": ["cong-tac-sinh-vien", "dao-tao-dai-hoc-hoc-vu"],
-      "gold_quote": "giải quyết chế độ chính sách, bảo hiểm thân thể, vay vốn tín dụng đào tạo; quản lý, giám sát việc xét, cấp học bổng tài trợ, học bổng ngoài ngân sách",
+      "checks": ["vay vốn tín dụng đào tạo", "học bổng khuyến khích học tập"],
       "metadata_filter": null,
       "trap_doc_ids": ["ke-hoach-tai-chinh-hoc-phi"]
     },
     {
       "id": "Q3",
-      "query": "Đơn vị nào tham mưu cho Hiệu trưởng về công tác chăm sóc sức khỏe cho sinh viên?",
-      "tests": "REQUIRED metadata-filter query (K4_VARIANT.md). The phrase 'tham mưu cho Hiệu trưởng' appears in 8 of the 10 documents because every unit page opens the same way, so unfiltered retrieval drowns in near-identical boilerplate. audience=student removes the five non-student pages and leaves the two that actually answer it.",
-      "gold_answer": "Trạm Y tế tham mưu cho Hiệu trưởng về quản lý, giáo dục và chăm sóc sức khỏe; trạm có hai cơ sở (khu giảng đường và khu KTX, 99 Nguyễn Chí Thanh) với 04 cán bộ y tế. Sau sáp nhập theo QĐ 2109/QĐ-ĐHGTVT, công tác y tế thuộc Phòng Chăm sóc người học, đơn vị này cũng là đầu mối bảo hiểm y tế cho sinh viên.",
-      "gold_doc_ids": ["tram-y-te", "cong-tac-sinh-vien"],
-      "gold_quote": "Tham mưu cho Hiệu trưởng trong việc quản lý, giáo dục và chăm sóc sức khỏe",
+      "query": "Đơn vị nào tổ chức thi và đánh giá kết quả học tập?",
+      "tests": "REQUIRED metadata-filter query (K4_VARIANT.md), and the cleanest A/B in the set. Unfiltered, the top hits are Phòng Quản lý chất lượng (audience: staff), which genuinely does run internal exams - semantically right, wrong audience. audience=student swings it to Phòng Đào tạo đại học. Note the effect is chunk-size dependent: at 500 the unfiltered run already scores 2/2 and the A/B disappears, which is why the group settled on 400.",
+      "gold_answer": "Phòng Đào tạo đại học: thẩm tra và quản lý điểm của sinh viên, phối hợp với các đơn vị quản lý sinh viên và chủ trì việc đánh giá kết quả học tập của sinh viên theo quy chế.",
+      "gold_doc_ids": ["dao-tao-dai-hoc-hoc-vu"],
+      "checks": ["đánh giá kết quả học tập của sinh viên"],
       "metadata_filter": {"audience": "student"},
-      "trap_doc_ids": ["quan-ly-chat-luong", "phap-che-kiem-soat", "thu-vien-dich-vu"]
+      "trap_doc_ids": ["quan-ly-chat-luong"]
     },
     {
       "id": "Q4",
       "query": "Ai quản lý ký túc xá của trường?",
-      "tests": "Superseded-document conflict. The corpus holds two contradictory official answers: the Ban Quản lý KTX page (QĐ 390/QĐ-TC, 1981) still presents itself as a live unit, while the Phòng Chăm sóc người học page records that it absorbed Ban Quản lý KTX. Both were crawled the same day from the current site. No chunking strategy resolves this - only document_version / supersedes metadata does.",
-      "gold_answer": "Phòng Chăm sóc người học. Theo QĐ số 2109/QĐ-ĐHGTVT, phòng này được thành lập trên cơ sở sáp nhập Phòng CTCT&SV, Ban Quản lý KTX và Trạm Y tế; công tác quản lý sinh viên nội trú nay thuộc phòng này. Trang Ban Quản lý Ký túc xá vẫn còn trên website nhưng mô tả tình trạng trước sáp nhập.",
+      "tests": "Superseded-document conflict. Two contradictory official answers, both crawled the same day from the live site: the Ban Quản lý KTX page still presents itself as active (QĐ 390/QĐ-TC, 1981) while the Phòng Chăm sóc người học page records that it absorbed that unit (QĐ 2109/QĐ-ĐHGTVT). Every chunking strategy ranks the stale page first, so this is not fixable by chunking - only document_version / supersedes metadata resolves it.",
+      "gold_answer": "Phòng Chăm sóc người học. Theo QĐ số 2109/QĐ-ĐHGTVT, phòng này được thành lập trên cơ sở sáp nhập Phòng CTCT&SV, Ban Quản lý KTX và Trạm Y tế; công tác quản lý sinh viên nội trú nay thuộc phòng này.",
       "gold_doc_ids": ["cong-tac-sinh-vien"],
-      "gold_quote": "Phòng Chăm sóc người học được thành lập theo Quyết định số 2109/QĐ-ĐHGTVT trên cơ sở sắp xếp, sáp nhập lại Phòng CTCT&SV, Ban Quản lý KTX, Trạm Y tế",
+      "checks": ["sáp nhập lại Phòng CTCT&SV"],
       "metadata_filter": null,
       "trap_doc_ids": ["ky-tuc-xa-quan-ly"]
     },
     {
       "id": "Q5",
-      "query": "Tra cứu tài liệu thư viện trực tuyến ở địa chỉ nào và thư viện phục vụ những đối tượng bạn đọc nào?",
-      "tests": "Two-part answer from one document: a concrete resource plus an enumerated list. Also the document that justifies audience=all rather than splitting by reader type, because the answer itself spans students and staff.",
+      "query": "Tra cứu tài liệu thư viện trực tuyến ở đâu, phục vụ những đối tượng nào?",
+      "tests": "Two-part answer from one document. The OPAC address and the reader list sit in different chunks, so a small chunk size retrieves the right document and still misses half the answer. Also the query that exposed 116 invisible U+00A0 characters in the corpus.",
       "gold_answer": "Tra cứu trực tuyến (OPAC) tại http://opac.utc.edu.vn. Đối tượng bạn đọc: giảng viên, cán bộ nghiên cứu, nghiên cứu sinh, học viên cao học và sinh viên trong và ngoài Trường.",
       "gold_doc_ids": ["thu-vien-dich-vu"],
-      "gold_quote": "Bạn đọc có thể tra cứu trực tuyến (OPAC) thông qua hệ thống máy tính đặt tại các phòng đọc thư viện",
+      "checks": ["opac.utc.edu.vn", "trong và ngoài Trường"],
       "metadata_filter": null,
       "trap_doc_ids": ["dao-tao-truc-tuyen"]
     }

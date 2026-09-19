@@ -106,13 +106,14 @@ ra 14 chunk ngắn, trang ký túc xá viết văn xuôi dài nên ra 4 chunk r�
 ### Chiến lược của từng thành viên
 
 **Thành viên 1 — Hoàng Quốc Việt (02563)**
-- **Loại chiến lược:** `FixedSizeChunker(chunk_size=500, overlap=50)`
+- **Loại chiến lược:** `FixedSizeChunker(chunk_size=400, overlap=50)`
 - **Mô tả & lý do:** Chọn làm **đường cơ sở có chủ đích**, không phải vì lười. Corpus này gồm
   10 trang cùng khuôn mẫu, độ dài chênh nhau gấp đôi; chia đều theo ký tự cho phân bố chunk ổn
-  định nhất (min 340–431, max 500 trên cả ba tài liệu đo thử), nên mọi chiến lược khác được so
-  với một mốc không thiên vị tài liệu nào. Overlap 50 để câu vắt qua ranh giới vẫn xuất hiện
-  nguyên vẹn ở ít nhất một chunk.
-- **Kết quả:** **hit@3 = 5/5**, 70 chunk.
+  định nhất, nên mọi chiến lược khác được so với một mốc không thiên vị tài liệu nào. Overlap 50
+  để câu vắt qua ranh giới vẫn xuất hiện nguyên vẹn ở ít nhất một chunk.
+  **Chốt 400 chứ không phải 500**: ở 500 thì câu 3 đã đạt 2/2 ngay cả khi không lọc, tức là cặp
+  A/B chứng minh giá trị của metadata filter biến mất. 400 giữ được phép chứng minh đó.
+- **Kết quả:** **90 chunk** · doc_id hit@3 = **5/5** · chấm nội dung = **4/10**.
 
 **Thành viên 2 — [Tên]**
 - **Loại chiến lược:** `SentenceChunker(max_sentences_per_chunk=3)` → `--strategy sentence`
@@ -157,7 +158,7 @@ Cùng 10 tài liệu, cùng 5 câu hỏi, cùng embedder
 
 | Chiến lược | Số chunk | hit@3 | Điểm rubric | Điểm mạnh | Điểm yếu |
 |---|---|---|---|---|---|
-| **Fixed size** (Việt) | 70 | **5/5** | 9/10 | Phân bố đều, ổn định trên mọi tài liệu | Cắt giữa câu; Q4 vẫn sai |
+| **Fixed size 400/50** (Việt) | 90 | **5/5** | **4/10** | Phân bố đều, ổn định trên mọi tài liệu | Cắt giữa câu; câu 2, 4, 5 đúng tài liệu nhưng sai chunk |
 | By sentence | 64 | 4/5 | 7/10 | Chunk đọc được như văn xuôi | **Trượt hẳn Q4** — tài liệu đúng rơi khỏi top-3 |
 | Recursive | 105 | **5/5** | 9/10 | Tôn trọng ranh giới ngữ nghĩa | Sinh chunk vụn (có chunk 5 ký tự) |
 | By heading | 49 | **5/5** | 9/10 | **Ít chunk nhất mà vẫn 5/5** — hiệu quả lưu trữ tốt nhất | Chunk lệch mạnh (79 → 1.181 ký tự) |
@@ -189,11 +190,11 @@ Bản máy đọc được: `benchmark/queries.json`. Mọi thành viên chạy 
 |---|---|---|---|
 | 1 | Ký túc xá của trường có bao nhiêu phòng và sức chứa bao nhiêu sinh viên? | 03 khối nhà 4–5 tầng, **214 phòng** khép kín, sức chứa **1.500 sinh viên** | `ky-tuc-xa-quan-ly` |
 | 2 | Sinh viên muốn hỏi về học bổng và vay vốn tín dụng đào tạo thì liên hệ đơn vị nào? | Phòng Chăm sóc người học (vay vốn, học bổng tài trợ / ngoài ngân sách); **học bổng khuyến khích học tập** do Phòng Đào tạo đại học chủ trì xét | `cong-tac-sinh-vien` + `dao-tao-dai-hoc-hoc-vu` |
-| 3 | Đơn vị nào tham mưu cho Hiệu trưởng về công tác chăm sóc sức khỏe cho sinh viên? | Trạm Y tế — 2 cơ sở, 04 cán bộ y tế; sau QĐ 2109 thuộc Phòng Chăm sóc người học | `tram-y-te` + `cong-tac-sinh-vien` |
+| 3 | Đơn vị nào tổ chức thi và đánh giá kết quả học tập? | Phòng Đào tạo đại học — thẩm tra, quản lý điểm và **chủ trì việc đánh giá kết quả học tập của sinh viên** theo quy chế | `dao-tao-dai-hoc-hoc-vu` |
 | 4 | Ai quản lý ký túc xá của trường? | Phòng Chăm sóc người học, theo **QĐ 2109/QĐ-ĐHGTVT** sáp nhập Phòng CTCT&SV + Ban QL KTX + Trạm Y tế | `cong-tac-sinh-vien` |
 | 5 | Tra cứu tài liệu thư viện trực tuyến ở địa chỉ nào và thư viện phục vụ những đối tượng bạn đọc nào? | OPAC tại `http://opac.utc.edu.vn`; bạn đọc gồm giảng viên, cán bộ nghiên cứu, NCS, học viên cao học và sinh viên trong và ngoài Trường | `thu-vien-dich-vu` |
 
-**Câu 3 là câu bắt buộc phải lọc metadata** (`metadata_filter={"audience": "student"}`).
+**Câu 3 là câu bắt buộc phải lọc metadata** (`metadata_filter={"audience": "student"}`), và là cặp A/B sạch nhất: không lọc thì top-1 là `quan-ly-chat-luong` (`audience: staff`) — trang đó ghi đúng cụm *"Chủ trì tổ chức các kỳ thi nội bộ và công tác đánh giá kết quả học tập"*, tức là **không sai về ngữ nghĩa, chỉ sai đối tượng**. Lọc `audience=student` đưa đúng `dao-tao-dai-hoc-hoc-vu` lên đầu: **1/2 → 2/2**.
 
 ### Tổng hợp chất lượng truy xuất của nhóm
 
@@ -204,7 +205,7 @@ Bản máy đọc được: `benchmark/queries.json`. Mọi thành viên chạy 
 |---|---|---|---|---|---|---|
 | 1 | ✅ +0,7358 | ✅ +0,6300 | ✅ +0,7769 | ✅ +0,8003 | **2** | Mọi chiến lược đều top-1 đúng |
 | 2 | ✅ +0,6330 | ✅ +0,7709 | ✅ +0,6759 | ✅ +0,5823 | **2** | Top-3 gom được cả hai phòng |
-| 3 | ✅ +0,7232 | ✅ +0,7473 | ✅ +0,8055 | ✅ +0,7806 | **2** | Có lọc `audience=student` |
+| 3 | ✅ +0,720 | — | ✅ | ✅ | **2** | Không lọc: 1/2 (`quan-ly-chat-luong`, staff) → lọc: **2/2** |
 | 4 | ⚠️ hạng 3 | ❌ ngoài top-3 | ⚠️ trong top-3 | ⚠️ trong top-3 | **1** | **Tài liệu cũ thắng ở mọi chiến lược** |
 | 5 | ✅ +0,6550 | ✅ +0,6468 | ✅ +0,6728 | ✅ +0,6938 | **2** | Cả 3 chunk top đều đúng tài liệu |
 | | | | | | **9 / 10** | (chiến lược fixed của Việt) |
