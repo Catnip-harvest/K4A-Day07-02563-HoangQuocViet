@@ -25,15 +25,15 @@ Phòng 103 nhà A1 Trường Đại học GTVT
 
 (024) 37669295
 
-Trưởng phòng:   ThS. Nguyễn Thị Mai Anh
+Trưởng phòng:   ThS. Nguyễn Thị Mai Anh
 
 Phó trưởng phòng: ThS. Vũ Thị Hoàng Yến
 
 GIỚI THIỆU
 
-Phòng Tài chính Kế toán được hình thành ngay từ những ngày đầu thành lập Trường Cao đẳng công chính (tiền thân của Trường Đại học GTVT ngày nay) năm 1945 với chức năng tham mưu và giúp Hiệu trưởng về công tác kế hoạch, tài chính, kế toán, quản lý và sử dụng tài sản của Trường. Phòng hiện có 8 Cán bộ , trong đó có 06 Đảng viên; 06 Thạc sỹ, 02 Cử nhân. Tập thể Phòng luôn đoàn kết, cố gắng khắc phục khó khăn, hoàn thành xuất sắc mọi nhiệm vụ được giao. Cán bộ của Phòng gương mẫu đi đầu trong việc chấp hành nền nếp, nội quy của Nhà trường, tác phong làm việc chính quy, chuyên nghiệp và thái độ ứng xử văn hoá.
+Phòng Tài chính Kế toán được hình thành ngay từ những ngày đầu thành lập Trường Cao đẳng công chính (tiền thân của Trường Đại học GTVT ngày nay) năm 1945 với chức năng tham mưu và giúp Hiệu trưởng về công tác kế hoạch, tài chính, kế toán, quản lý và sử dụng tài sản của Trường. Phòng hiện có 8 Cán bộ , trong đó có 06 Đảng viên; 06 Thạc sỹ, 02 Cử nhân. Tập thể Phòng luôn đoàn kết, cố gắng khắc phục khó khăn, hoàn thành xuất sắc mọi nhiệm vụ được giao. Cán bộ của Phòng gương mẫu đi đầu trong việc chấp hành nền nếp, nội quy của Nhà trường, tác phong làm việc chính quy, chuyên nghiệp và thái độ ứng xử văn hoá.
 
-Đến tháng 9/2026, Phòng chính thức đổi tên thành Phòng Kế hoạch - Tài chính theo QĐ số 2106/QĐ-ĐHGTVT ngày 22/8/2026.
+Đến tháng 9/2026, Phòng chính thức đổi tên thành Phòng Kế hoạch - Tài chính theo QĐ số 2106/QĐ-ĐHGTVT ngày 22/8/2026.
 
 CHỨC NĂNG NHIỆM VỤ
 
@@ -65,10 +65,10 @@ k) Thực hiện các nhiệm vụ khác theo phân công của Hiệu trưởng
 
 CÁC THÀNH TÍCH ĐÃ ĐẠT ĐƯỢC
 
-1. Huân chương lao động hạng Ba năm 2015 theo QĐ số 1514/QĐ-CTN ngày 23/8/2015
+1. Huân chương lao động hạng Ba năm 2015 theo QĐ số 1514/QĐ-CTN ngày 23/8/2015
 
-2. Bằng khen Bộ trưởng Bộ Giáo dục và Đào tạo- Tập thể lao động xuất sắc năm học 2012-2013; 2013-2014; 2015-2016; 2016-2017;
+2. Bằng khen Bộ trưởng Bộ Giáo dục và Đào tạo- Tập thể lao động xuất sắc năm học 2012-2013; 2013-2014; 2015-2016; 2016-2017;
 
-3. Chi bộ Tài chính Kế toán được Đảng ủy Khối các Trường Đại học  Cao đẳng Hà nội tặng Giấy khen Chi bộ 3 trong sạch vững mạnh 3 năm liền; nhiều giấy khen của Đảng ủy Trường do có nhiều thành tích xuất sắc trong công tác;
+3. Chi bộ Tài chính Kế toán được Đảng ủy Khối các Trường Đại học  Cao đẳng Hà nội tặng Giấy khen Chi bộ 3 trong sạch vững mạnh 3 năm liền; nhiều giấy khen của Đảng ủy Trường do có nhiều thành tích xuất sắc trong công tác;
 
-4. Nhiều cán bộ Phòng được nhận bằng khen của Bộ trưởng; của Hiệu trưởng do hoàn thành xuất sắc nhiệm vụ được giao.
+4. Nhiều cán bộ Phòng được nhận bằng khen của Bộ trưởng; của Hiệu trưởng do hoàn thành xuất sắc nhiệm vụ được giao.

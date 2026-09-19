@@ -23,7 +23,7 @@ THÔNG TIN CHUNG
 
 Địa chỉ:
 
-Tầng 2 - nhà B3 - Trường ĐH GTVT - Phường Láng - Hà Nội
+Tầng 2 - nhà B3 - Trường ĐH GTVT - Phường Láng - Hà Nội
 
 Điện thoại:
 
@@ -33,17 +33,17 @@ Email:
 
 Website:
 
-elearning.utc.edu.vn                FB: https://www.facebook.com/utcelearning
+elearning.utc.edu.vn                FB: https://www.facebook.com/utcelearning
 
-Giám đốc: PGS.TS Hồ Thị Lan Hương (P. 203-B3)
+Giám đốc: PGS.TS Hồ Thị Lan Hương (P. 203-B3)
 
-Phó giám đốc: PGS.TS Đào Duy Lâm  (P. 205-B3)
+Phó giám đốc: PGS.TS Đào Duy Lâm  (P. 205-B3)
 
 Phòng Studio UTC: P. 204 - B3
 
 GIỚI THIỆU
 
-Trung tâm Đào tạo trực tuyến UTC (UTC Online Education Center) thành lập theo Quyết định số 1458/QĐ-ĐH GTVT ngày 05/7/2019  của Hiệu trưởng Trường Đại học Giao thông vận tải.
+Trung tâm Đào tạo trực tuyến UTC (UTC Online Education Center) thành lập theo Quyết định số 1458/QĐ-ĐH GTVT ngày 05/7/2019  của Hiệu trưởng Trường Đại học Giao thông vận tải.
 
 Trung tâm có Sứ mạng là phát triển hình thức đào tạo mới hiện đại, là đòn bẩy thay đổi tư duy, thói quen của người học, người dạy, là môi trường kết nối linh hoạt, đem lại lợi ích cao nhất cho nhà trường và xã hội.
 
@@ -53,11 +53,11 @@ Tầm nhìn và mục tiêu:
 
 - Là không gian kết nối lớn của trường cho người học, người dạy và người sử dụng lao động, tạo môi trường giáo dục chủ động và sáng tạo, hình thành ý thức học tập suốt đời, thích ứng mọi hoàn cảnh và mang đến giá trị khác biệt trong kỷ nguyên công nghiệp 4.0.
 
-- Có vai trò quan trọng trong đào tạo, tuyển sinh và tạo nguồn thu của nhà trường.
+- Có vai trò quan trọng trong đào tạo, tuyển sinh và tạo nguồn thu của nhà trường.
 
 CHỨC NĂNG NHIỆM VỤ
 
-Trung tâm Đào tạo trực tuyến UTC có các chức năng và nhiệm vụ sau:
+Trung tâm Đào tạo trực tuyến UTC có các chức năng và nhiệm vụ sau:
 
 Chức năng:
 

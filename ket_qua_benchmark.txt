@@ -1,0 +1,70 @@
+==============================================================================
+Chunker        : FixedSizeChunker {'chunk_size': 400, 'overlap': 50}
+Embedding      : sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2
+Dữ liệu        : data\dich-vu-sinh-vien-utc (10 file)
+Số chunk đã nạp: 90 | độ dài TB: 381 ký tự
+(* = chunk thuộc tài liệu gold)
+==============================================================================
+--- Q1  | filter=None
+  1.* score=0.789  doc_id=ky-tuc-xa-quan-ly  (ky-tuc-xa-quan-ly#3)
+       trở thành nơi có môi trường giáo dục lành mạnh cho sinh viên .  Ký túc xá của trường có 03 khối nhà vĩnh cửu t...
+  2.  score=0.564  doc_id=ke-hoach-tai-chinh-hoc-phi  (ke-hoach-tai-chinh-hoc-phi#1)
+       ững ngày đầu thành lập Trường Cao đẳng công chính (tiền thân của Trường Đại học GTVT ngày nay) năm 1945 với ch...
+  3.  score=0.549  doc_id=cong-tac-sinh-vien  (cong-tac-sinh-vien#0)
+       # Phòng Chăm sóc người học: công tác sinh viên, học bổng và chế độ chính sách  Phòng chăm sóc người học  PHÒNG...
+  gold doc trong top-3: CÓ | chuỗi đáp án: '214 phòng': OK, '1500 sinh viên': OK | điểm: 2/2
+
+--- Q2  | filter=None
+  1.* score=0.694  doc_id=cong-tac-sinh-vien  (cong-tac-sinh-vien#5)
+       iệc xét, cấp học bổng tài trợ, học bổng ngoài ngân sách; đầu mối đề nghị khen thưởng,  e) Đầu mối triển khai c...
+  2.  score=0.546  doc_id=ke-hoach-tai-chinh-hoc-phi  (ke-hoach-tai-chinh-hoc-phi#10)
+       n vốn đầu tư.  i) Công tác phát triển nguồn thu và tài chính bền vững: tham mưu chiến lược tự chủ tài chính gắ...
+  3.* score=0.546  doc_id=dao-tao-dai-hoc-hoc-vu  (dao-tao-dai-hoc-hoc-vu#8)
+       ề có liên quan đến thí sinh).  d. Thẩm tra và quản lý điểm của sinh viên bậc đại học hệ chính quy, hệ phi chín...
+  gold doc trong top-3: CÓ | chuỗi đáp án: 'vay vốn tín dụng đào tạo': THIẾU, 'học bổng khuyến khích học tập': OK | điểm: 0/2
+
+--- Q3 [A: không filter] | filter=None
+  1.  score=0.744  doc_id=quan-ly-chat-luong  (quan-ly-chat-luong#6)
+       ng và phối hợp kiểm tra, giám sát việc xây dựng, rà soát chương trình đào tạo.  e) Giám sát đánh giá về chất l...
+  2.* score=0.720  doc_id=dao-tao-dai-hoc-hoc-vu  (dao-tao-dai-hoc-hoc-vu#8)
+       ề có liên quan đến thí sinh).  d. Thẩm tra và quản lý điểm của sinh viên bậc đại học hệ chính quy, hệ phi chín...
+  3.  score=0.688  doc_id=quan-ly-chat-luong  (quan-ly-chat-luong#5)
+       t phương án sử dụng kết quả để nâng cao chất lượng đào tạo; thực hiện công tác công khai theo quy định của Bộ ...
+  gold doc trong top-3: CÓ | chuỗi đáp án: 'đánh giá kết quả học tập của sinh viên': OK | điểm: 1/2
+--- Q3 [B: có filter] | filter={'audience': 'student'}
+  1.* score=0.720  doc_id=dao-tao-dai-hoc-hoc-vu  (dao-tao-dai-hoc-hoc-vu#8)
+       ề có liên quan đến thí sinh).  d. Thẩm tra và quản lý điểm của sinh viên bậc đại học hệ chính quy, hệ phi chín...
+  2.* score=0.671  doc_id=dao-tao-dai-hoc-hoc-vu  (dao-tao-dai-hoc-hoc-vu#6)
+       uất bản giáo trình, bài giảng phục vụ đào tạo đại học.  2. Công tác tổ chức và quản lý đào tạo  a. Tổ chức thự...
+  3.* score=0.662  doc_id=dao-tao-dai-hoc-hoc-vu  (dao-tao-dai-hoc-hoc-vu#9)
+       lập các Hội đồng chấm đồ án tốt nghiệp bậc đại học hệ chính quy, hệ phi chính quy do các bộ môn đề xuất; thẩm ...
+  gold doc trong top-3: CÓ | chuỗi đáp án: 'đánh giá kết quả học tập của sinh viên': OK | điểm: 2/2
+
+--- Q4  | filter=None
+  1.  score=0.759  doc_id=ky-tuc-xa-quan-ly  (ky-tuc-xa-quan-ly#1)
+       số 390/QĐ-TC, ngày 24 tháng 10 năm 1981 của Hiệu Trưởng trường đại học Giao thông Đường sắt và Đường bộ ( hiện...
+  2.  score=0.709  doc_id=ky-tuc-xa-quan-ly  (ky-tuc-xa-quan-ly#0)
+       # Ban Quản lý Ký túc xá: chức năng và dịch vụ cho sinh viên nội trú  Ban Quản lý ký túc xá  BAN QUẢN LÝ KÝ TÚC...
+  3.* score=0.658  doc_id=cong-tac-sinh-vien  (cong-tac-sinh-vien#0)
+       # Phòng Chăm sóc người học: công tác sinh viên, học bổng và chế độ chính sách  Phòng chăm sóc người học  PHÒNG...
+  gold doc trong top-3: CÓ | chuỗi đáp án: 'sáp nhập lại Phòng CTCT&SV': THIẾU | điểm: 0/2
+
+--- Q5  | filter=None
+  1.* score=0.702  doc_id=thu-vien-dich-vu  (thu-vien-dich-vu#7)
+       o chủ đề, …  - Dịch vụ: Phục vụ đọc tài liệu tại chỗ; Mượn tài liệu về nhà; Bán Giáo trình; Photo tài liệu; Cu...
+  2.* score=0.687  doc_id=thu-vien-dich-vu  (thu-vien-dich-vu#6)
+       , báo: Đọc tại chỗ.  + Phòng mượn Giáo trình; Sách tham khảo: mượn về nhà.  Dịch vụ thông tin:  - Bạn đọc có t...
+  3.* score=0.641  doc_id=thu-vien-dich-vu  (thu-vien-dich-vu#3)
+       rung tâm Thông tin - Thư viện có chức năng tham mưu cho Hiệu trưởng trong việc quản lý, tổng hợp, đề xuất ý ki...
+  gold doc trong top-3: CÓ | chuỗi đáp án: 'opac.utc.edu.vn': OK, 'trong và ngoài Trường': THIẾU | điểm: 0/2
+
+==============================================================================
+TỔNG KẾT
+  Q1: gold doc trong top-3=CÓ | điểm nội dung=2/2 
+  Q2: gold doc trong top-3=CÓ | điểm nội dung=0/2 
+  Q3: gold doc trong top-3=CÓ | điểm nội dung=2/2 A=1 / B=2
+  Q4: gold doc trong top-3=CÓ | điểm nội dung=0/2 
+  Q5: gold doc trong top-3=CÓ | điểm nội dung=0/2 
+  Chấm theo doc_id (ngây thơ): 5/5 câu có tài liệu gold trong top-3
+  Chấm theo nội dung         : 4/10 điểm
+==============================================================================

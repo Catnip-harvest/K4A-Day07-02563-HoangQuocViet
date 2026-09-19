@@ -21,11 +21,11 @@ THÔNG TIN CHUNG
 
 P101-103 Nhà A9; P107-108 Nhà A6
 
-Điện thoại: P101-103 Nhà A9 - ĐT: (024) 3.7666741; Văn phòng Hỗ trợ sinh viên - P108 Nhà A6 - ĐT: (024) 3766 0743
+Điện thoại: P101-103 Nhà A9 - ĐT: (024) 3.7666741; Văn phòng Hỗ trợ sinh viên - P108 Nhà A6 - ĐT: (024) 3766 0743
 
-Quyền trưởng phòng:  PGS. TS Nguyễn Xuân Tùng - P101 Nhà A9 (số 3 phố cầu giấy, P. Láng)
+Quyền trưởng phòng:  PGS. TS Nguyễn Xuân Tùng - P101 Nhà A9 (số 3 phố cầu giấy, P. Láng)
 
-Phó trưởng phòng: TS. Mai Đức Anh - P107 Nhà A5 (khu KTX - 99 Nguyễn Chí Thanh)
+Phó trưởng phòng: TS. Mai Đức Anh - P107 Nhà A5 (khu KTX - 99 Nguyễn Chí Thanh)
 
 GIỚI THIỆU
 

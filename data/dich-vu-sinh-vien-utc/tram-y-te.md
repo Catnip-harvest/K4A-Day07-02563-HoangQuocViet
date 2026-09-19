@@ -25,17 +25,17 @@ Số 3 Cầu Giấy P. Láng , TP. Hà Nội
 
 (024)38358811
 
-Trưởng Trạm: Bs Nguyễn Lương Bình
+Trưởng Trạm: Bs Nguyễn Lương Bình
 
 CHỨC NĂNG NHIỆM VỤ
 
 Trạm Y tế – Trường Đại học Giao thông vận tải được thành lập ngày 17 tháng 09 năm 2002 theo Quyết định số 4198/QĐ-BGD&ĐT-TCCB của Bộ Giáo dục và đào tạo. Trạm có hai cơ sở:
 
-- Cơ sở 1 tại khu giảng đường – Trường Đại học GTVT – Phường Láng – Hà Nội. Số điện thoại: 04.37668900.
+- Cơ sở 1 tại khu giảng đường – Trường Đại học GTVT – Phường Láng – Hà Nội. Số điện thoại: 04.37668900.
 
 - Cơ sở 2 tại địa chỉ số 99 Nguyễn Chí Thanh P. Láng – Hà Nội ( Khu Ký túc xá ) Số điện thoại: 04.38358811;
 
-Hiện tại Trạm có 04 cán bộ y tế trong đó có  01 bác sỹ đa khoa; 03 y sỹ đa khoa.
+Hiện tại Trạm có 04 cán bộ y tế trong đó có  01 bác sỹ đa khoa; 03 y sỹ đa khoa.
 
 Chức năng, nhiệm vụ:
 

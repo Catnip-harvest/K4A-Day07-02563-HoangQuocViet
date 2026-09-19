@@ -61,7 +61,13 @@ def split_front_matter(text: str) -> tuple[str, str]:
 def normalise(body: str) -> list[str]:
     # The source pages wrap everything in empty block tags, so the extracted text
     # arrives with runs of hundreds of blank lines.
-    return [line.strip().replace("﻿", "") for line in body.split("\n")]
+    #
+    # U+00A0 comes from &nbsp; in the source HTML and is invisible in every
+    # editor, but it is not a space to anything that compares strings. It broke a
+    # benchmark check that looked for "trong va ngoai Truong" in text that reads
+    # exactly that way, and it also defeats RecursiveChunker, whose separator list
+    # contains a normal space and so cannot split where an NBSP welds two words.
+    return [line.strip().replace("﻿", "").replace(" ", " ") for line in body.split("\n")]
 
 
 def drop_chrome_runs(lines: list[str], common: set[str]) -> list[str]:
