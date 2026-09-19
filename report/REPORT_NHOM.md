@@ -1,6 +1,6 @@
 # Báo Cáo Nhóm — Lab 7: Embedding & Vector Store
 
-**Nhóm:** [Tên nhóm]
+**Nhóm:** Logitech
 **Thành viên:** [Họ tên từng thành viên]
 **Ngày:** [Ngày nộp]
 

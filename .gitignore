@@ -20,3 +20,10 @@ src_w_solution/
 
 # Instructor-only notes (chứa gợi ý/đáp án chấm bài, không public cho học viên)
 docs/INSTRUCTOR_GUIDE.md
+
+# Next.js UI
+ui/node_modules/
+ui/.next/
+ui/out/
+ui/*.tsbuildinfo
+ui/next-env.d.ts

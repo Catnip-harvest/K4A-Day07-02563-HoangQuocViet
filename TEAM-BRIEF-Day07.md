@@ -1,6 +1,6 @@
 # Day 07 — Brief cho nhóm: nguồn dữ liệu & việc cần chốt
 
-**Người viết:** Hoàng Quốc Việt (02563) · **Ngày:** 2026-09-19
+**Nhóm:** Logitech · **Người viết:** Hoàng Quốc Việt (02563) · **Ngày:** 2026-09-19
 **Repo cá nhân:** https://github.com/Catnip-harvest/K4A-Day07-02563-HoangQuocViet
 
 File này chỉ để nhóm phối hợp, **không phải bài nộp**. Bài nộp là `src/`,
@@ -11,7 +11,7 @@ File này chỉ để nhóm phối hợp, **không phải bài nộp**. Bài n�
 ## 1. TL;DR
 
 1. **Trang `tuyensinh.utc.edu.vn` KHÔNG dùng được** — thông tin ngành nằm trong ảnh JPEG, không có chữ để máy đọc. Đo cụ thể ở mục 3.
-2. **Đã thay bằng `utc.edu.vn/gioi-thieu/<đơn-vị>`** — văn bản thật, đúng chủ đề L3A. Đã crawl xong **10 tài liệu / 31.212 ký tự**, nằm ở `data/dich-vu-sinh-vien-utc/`.
+2. **Đã thay bằng `utc.edu.vn/gioi-thieu/<đơn-vị>`** — văn bản thật, đúng chủ đề L3A. Đã crawl xong **10 tài liệu / 30.290 ký tự**, nằm ở `data/dich-vu-sinh-vien-utc/`.
 3. **Cảnh báo lớn:** chạy benchmark trên `MockEmbedder` mặc định sẽ cho kết quả ngẫu nhiên → mất gần hết 10 điểm Chất lượng truy xuất. Phải cài embedder thật. Chi tiết mục 5.
 4. Nhóm cần chốt 3 thứ: **bộ tài liệu**, **5 câu hỏi + gold answer**, **ai dùng chiến lược chunking nào**. Mục 6.
 
@@ -78,10 +78,10 @@ rồi làm sạch bằng `scripts/clean_utc_pages.py` (mình viết thêm).
 | `dao-tao-truc-tuyen` | student | hoc-truc-tuyen | 3.352 |
 | `thu-vien-dich-vu` | all | thu-vien | 3.490 |
 | `ke-hoach-tai-chinh-hoc-phi` | all | hoc-phi | 4.525 |
-| `bao-ve-an-ninh` | all | an-ninh | 2.913 |
+| `bao-ve-an-ninh` | all | an-ninh | 1.991 |
 | `quan-ly-chat-luong` | staff | dam-bao-chat-luong | 2.973 |
 | `phap-che-kiem-soat` | staff | phap-che | 2.726 |
-| | | **Tổng** | **31.212** |
+| | | **Tổng** | **30.290** |
 
 **`audience` có 3 giá trị** (student 5 / all 3 / staff 2) → `search_with_filter()` có việc
 thật để làm, đúng yêu cầu của `K4_VARIANT.md` là ít nhất 1 câu hỏi cần
